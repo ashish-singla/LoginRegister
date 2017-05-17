@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    
+   <% include ./partials/head %>
+
+    <link rel="icon" href="logo.jpg" />
+    <title>OTP Verification</title>
+  </head>
+  <body>
+  <% include ./partials/adminheader %>
+  <!-- pop up -->
+ <div id="OTP_modal" style="display:none;">
+ <div class="loading">
+ 	<div id="loader"></div>
+ </div>
+      <div class="col-sm-12 tAlignCenter bColorCCC lineHeight41 font">
+        <span>OTP</span>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-12 height25"></div>
+        <form name="otpForm" id="otpForm" method="get">
+          <div class="col-sm-12 font">
+            <div class="col-sm-12"><span>OTP</span></div>
+            <div class="col-sm-12">
+              <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></div> 
+                <input id="otp" type="text" name="otp" class="form-control " maxlength="6" />
+              </div>
+            </div>
+            <div class="col-sm-12 height11"></div>
+            <div class="col-sm-12">
+              <span class="cursorPointer tColorBlue" onclick="resendOtp();">Resend OTP</span>
+            </div>
+            <div class="col-sm-12">
+              <span class="error" id="errorOldPasswordModal"></span>
+              <span class="success"></span>
+            </div>
+          </div>
+          </div>
+          <div class="col-sm-12 font center">
+            <div class="col-sm-12">
+                 <input type="button" class="btn btn-primary padCancel" id="otpVerifyBtn" name="otpVerifyBtn" value="Verify Email" onclick="validateOtp('#otp');" />
+            </div>
+            </div>
+            <div class="col-sm-12 height11"></div>
+            <div class="col-sm-12 center">
+              <span class="error" id="errorOtp" style="padding-left: 12px;"></span>
+              <span class="success" id="successOtp" style="padding-left: 12px;"></span>
+            </div>
+            <div class="col-sm-12 height11"></div>
+        </form>
+      </div>     
+    </div>
+  <a id="OtpPopup" href="#OTP_modal" rel="modal:open" class="tColorBlue" style="display:none">OTP</a>
+  <!-- close pop up -->
+    <div class="col-sm-12 font tColorWhite">
+      <div class="col-sm-12 height25"></div>
+      <div class="col-sm-12 height25"></div>
+      <div class="col-sm-5 mLeft62 mTop-10 tColorBlue width38"><span id="loading"><i class="fa-li fa fa-spinner fa-spin fa-10x"></i></span></div>
+    </div>
+    <% include ./partials/footer %>
+     <script type="text/javascript" src="/js/otp.js"></script>
+  </body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <% include ./partials/head %>
+        <title>Login / Sign-Up</title>
+</head>
+
+<body class="loginBody">
+    <div class="col-sm-12 font tColorWhite login-TopHeader">
+        <div class="col-sm-12 height11"></div>
+        <div class="col-sm-6 subheaderMaster">
+            <!-- <img src="" class="subheaderMaster" height="69px" width="65px"> -->
+        </div>
+        <!-- login form -->
+
+        <div id="loginForm" class="col-sm-6 font">
+            <div class="col-sm-5  paddingLeft0">
+                <div class="col-sm-12"><span>Email</span></div>
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                        <input id="loginEmail" tabindex="1" type="email" autocomplete="off" name="loginEmail" class="form-control " value="" maxlength="30" />
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <span class="error" id="errorEmail"></span>
+                    <span class="success" id="successEmail"></span>
+                </div>
+            </div>
+            <div class="col-sm-5 paddingLeft0">
+                <div class="col-sm-12"><span>Password</span></div>
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
+                        <input type="password" id="loginPassword" tabindex="2" name="loginPassword" class="form-control" autocomplete="off" maxlength="30" />
+                    </div>
+                </div>
+
+                <div class="col-sm-12"><span class="error" id="errorLoginPassword"></span></div>
+                <div class="col-sm-12"><a href="#forget-modal" rel="modal:open" class="tColorBlue">Forgot Password?</a>
+                </div>
+            </div>
+            <div class="col-sm-2 paddingLeft0 paddingRight0">
+                <div class="col-sm-12 height20"></div>
+                <div class="col-sm-12">
+                    <input type="button" class="btn btn-primary form-control" tabindex="3" id="loginBtn" name="Login" value="Login" onclick="validateLoginForm()" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="loading">
+        <div id="loader"></div>
+    </div>
+    <div id="mainpage">
+        <div class="col-sm-12 tColorWhite font tAlignCenter mTop12">
+            <div class="col-sm-12">
+                <div class="col-sm-12 height11"></div>
+                <div class="col-sm-12">
+                    <span><a href="#register-modal" rel="modal:open" class="tColorBlue btn btn-primary pad">Register Now</a></span>
+                </div>
+                <div class="col-sm-12 height11"></div>
+                <div class="col-sm-12 height11"></div>
+            </div>
+        </div>
+
+        <!-- registeration modal -->
+        <div id="register-modal" class="heightAuto width65" style="display:none;">
+            <div class="col-sm-12 tAlignCenter bColorCCC lineHeight41 font">
+                <strong>Sign Up</strong>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <form method="post" action="/clientRegisteration" id="registerForm" name="registerForm" autocomplete="off">
+                        <div class="col-sm-12 height20"></div>
+                        <div class="col-sm-12 height11"></div>
+                        <div class="col-sm-12 font">
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>Name<sup class="error">*</sup></span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                        <input type="text" class="form-control" id="contactperson" name="contactperson" maxlength="30" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><span class="error" id="errorContactPerson"></span></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>Email<sup class="error">*</sup></span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                        <input type="email" class="form-control" id="registerEmail" name="registerEmail" onkeyup="emailValidate('#registerEmail', 'registerForm')" maxlength="30" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><span class="error" id="errorEmailR"></span></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>Password<sup class="error">*</sup></span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
+                                        <input type="password" class="form-control " id="registerPassword" name="registerPassword" maxlength="30" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><span class="error" id="errorRegisterPassword"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 height11"></div>
+                        <div class="col-sm-12 font">
+
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>Confirm Password<sup class="error">*</sup></span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
+                                        <input type="password" class="form-control " id="confirmRegisterPassword" name="confirmRegisterPassword" maxlength="30" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><span class="error" id="errorConfirmPassword"></span></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>Address Line 1<sup class="error">*</sup></span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                                        <input type="text" class="form-control" id="address1" name="address1" maxlength="20" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><span class="error" id="errorAddress"></span></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>Address Line 2</span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                                        <input type="text" class="form-control" id="address2" name="address2" maxlength="20" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 height11"></div>
+                        <div class="col-sm-12 font">
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>Address Line 3</span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                                        <input type="text" class="form-control" id="address3" name="address3" maxlength="20" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>Pin Code<sup class="error">*</sup></span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-qrcode" aria-hidden="true"></i></div>
+                                        <input class="form-control" type="text" name="pincode" id="pincode" maxlength="6">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><span class="error" id="errorPincode"></span></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>State<sup class="error">*</sup></span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-road" aria-hidden="true"></i></div>
+                                        <select class="form-control location" id="state" name="state">
+                      <option value="" selected="selected" disable="" style="display:none">State</option>
+                      <option value="ANDAMAN AND NICOBAR ISLANDS">Andaman and Nicobar Islands</option>
+                      <option value="ANDHRA PRADESH">Andhra Pradesh</option>
+                      <option value="ARUNACHAL PRADESH">Arunachal Pradesh</option>
+                      <option value="ASSAM">Assam</option>
+                      <option value="BIHAR">Bihar</option>
+                      <option value="CHANDIGARH">Chandigarh</option>
+                      <option value="CHATTISGARH">Chattisgarh</option>
+                      <option value="DADRA AND NAGAR HAVELI">Dadra and Nagar Haveli</option>
+                      <option value="DAMAN AND DIU">Daman and Diu</option>
+                      <option value="DELHI">Delhi</option>
+                      <option value="GOA">Goa</option>
+                      <option value="GUJARAT">Gujarat</option>
+                      <option value="HARYANA">Haryana</option>
+                      <option value="HIMACHAL PRADESH">Himachal Pradesh</option>
+                      <option value="JAMMU AND KASHMIR">Jammu and Kashmir</option>
+                      <option value="JHARKHAND">Jharkhand</option>
+                      <option value="KARNATAKA">Karnataka</option>
+                      <option value="KERALA">Kerala</option>
+                      <option value="LAKSHADWEEP">Lakshadweep</option>
+                      <option value="MADHYA PRADESH">Madhya Pradesh</option>
+                      <option value="MAHARASHTRA">Maharashtra</option>
+                      <option value="MANIPUR">Manipur</option>
+                      <option value="MEGHALAYA">Meghalaya</option>
+                      <option value="MIZORAM">Mizoram</option>
+                      <option value="NAGALAND">Nagaland</option>
+                      <option value="ODISHA">Odisha</option>
+                      <option value="PUDUCHERRY">Puducherry</option>
+                      <option value="PUNJAB">Punjab</option>
+                      <option value="RAJASTHAN">Rajasthan</option>
+                      <option value="SIKKIM">Sikkim</option>
+                      <option value="TAMIL NADU">Tamil Nadu</option>
+                      <option value="TELANGANA">Telangana</option>
+                      <option value="TRIPURA">Tripura</option>
+                      <option value="UTTAR PRADESH">Uttar Pradesh</option>
+                      <option value="UTTARAKHAND">Uttarakhand</option>
+                      <option value="WEST BENGAL">West Bengal</option>
+                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><span class="error" id="errorState"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 height11"></div>
+                        <div class="col-sm-12 font">
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>City<sup class="error">*</sup></span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-road" aria-hidden="true"></i></div>
+                                        <input type="text" name="city" class="form-control" id="city" size="30" value="" maxlength="30">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><span class="error" id="errorCity"></span></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-sm-12"><span>Contact No.<sup class="error">*</sup></span></div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                                        <input type="text" class="form-control" id="contactno" name="contactno" maxlength="10" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><span class="error" id="errorContact"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 height11"></div>
+                        <div class="col-sm-12 font">
+                            <div class="col-sm-3 col-sm-offset-3">
+                                <input type="button" class="btn btn-primary form-control" id="registerBtn" name="registerNow" value="Register Now" onclick="validateRegister()" />
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="button" class="btn btn-warning form-control" value="Cancel" onclick="closeModal('#registerModalClose'); resetErrors (); resetSignUp ();">
+                                <span class="hide"><a id="registerModalClose" href="#" rel="modal:close" >Cancel</a></span>
+                            </div>
+                            <div class="col-sm-12 height11"></div>
+                            <div class="col-sm-12 height25"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End of Registeration modal -->
+
+        <!-- login modal  -->
+        <div id="login_modal" style="display:none;">
+            <div class="col-sm-12 tAlignCenter bColorCCC lineHeight41 font">
+                <span>Login</span>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-12 height25"></div>
+                <form name="modalLoginForm" id="modalLoginForm" method="post" autocomplete="off">
+                    <div class="col-sm-12 font">
+                        <div class="col-sm-12"><span>Email<sup class="error">*</sup></span></div>
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                <input type="email" class="form-control " id="modalEmailLogin" name="loginEmail" onfocusout="emailValidate('#modalEmailLogin', 'modalLoginForm');" autocomplete="off" maxlength="30" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <span class="error" id="errorEmailLogin"></span>
+                            <span class="success" id="successEmailLogin"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 font">
+                        <div class="col-sm-12"><span>Password<sup class="error">*</sup></span></div>
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
+                                <input type="password" class="form-control" id="modelPasswordLogin" name="loginPassword" autocomplete="off" maxlength="30" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <span class="error" id="errorModelLoginPassword"></span>
+                            <span class="hide" style="position: relative;margin-left: 50%;font-size: 16px;" id="modalLoginFormLoader"><i class="fa-li fa fa-spinner fa-spin" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 height25"></div>
+                    <div class="col-sm-12 font">
+                        <div class="col-sm-5 col-sm-offset-1">
+                            <input type="button" class="btn btn-primary form-control" id="modalLoginBtn" name="Login" value="Login" onclick="validateLogin('#modalLoginForm');" />
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="button" class="btn btn-warning form-control" value="Cancel" onclick="closeModal('#inputModalClose'); resetErrors (); resetSignUp ();">
+                            <span class="hide"><a id="inputModalClose" rel="modal:close" href="#">Cancel</a></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 height11"></div>
+                    <div class="col-sm-12 font tAlignCenter" id="forget">
+                        <span>Having trouble in LogIn <a href="#forget-modal" rel="modal:open" class="tColorBlue">Click Here</a></span>
+                    </div>
+                    <div class="col-sm-12 height25"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Forget modal  -->
+        <div id="forget-modal" style="display: none;">
+            <div class="col-sm-12 tAlignCenter bColorCCC lineHeight41 font">
+                <span>Send Password</span>
+            </div>
+            <div class="col-sm-12">
+                <form name="modalForgetEmail" id="modalForgetEmail" method="post" autocomplete="off" onsubmit="return false">
+                    <div class="col-sm-12 height25"></div>
+                    <div class="col-sm-12 font">
+                        <div class="col-sm-12"><span>Email<sup class="error">*</sup></span></div>
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                <input type="email" class="form-control " id="forgetEmail" name="forgetEmail" autofocus maxlength="30" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12"><span class="hide" style="position: relative;margin-left: 50%;font-size: 16px;" id="loaderForgetP"><i class="fa-li fa fa-spinner fa-spin" aria-hidden="true"></i></span><span class="error" id="errorForgetEmail"></span><span class="success" id="successForgetEmail"></span></div>
+                    </div>
+                    <div class="col-sm-12 height20"></div>
+                    <div class="col-sm-12 font">
+                        <div class="col-sm-5 col-sm-offset-1">
+                            <input type="button" class="btn btn-primary form-control" id="frogetBtn" name="Submit" value="Mail Me" onclick="validateForgetEmail('modalForgetEmail');" />
+                        </div>
+
+                        <div class="col-sm-5">
+                            <input type="button" class="btn btn-warning form-control" value="Cancel" onclick="closeModal('#forgetModalClose'); resetErrors (); resetSignUp ();">
+                            <span class="hide"><a id="forgetModalClose" rel="modal:close" href="#">Cancel</a></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 height25"></div>
+                </form>
+            </div>
+        </div>
+
+</body>
+<% include ./partials/footer %>
+
+</html>

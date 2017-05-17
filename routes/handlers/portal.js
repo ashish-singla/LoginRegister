@@ -8,7 +8,6 @@ var configEmail=require('../../config/config').mailconfig;
 var url =require('../../config/config').url;
 var path = require('path');
 var fs = require('fs');
-var textract = require('textract');
  var crypto = require('crypto'),
     key = 'efghabcdijklmnop',
     iv = '0123456789654321',
